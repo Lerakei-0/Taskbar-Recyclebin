@@ -5,7 +5,7 @@
 
 Pin the Recycle Bin to your Windows taskbar with a right-click jump list for
 **Empty Recycle Bin** and **Open Recycle Bin** — with the jump list text
-available in 14 languages. BUILT WITH CLAUDE.
+available in 14 languages. **BUILT WITH CLAUDE**.
 
 ## What's included
 
