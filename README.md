@@ -1,4 +1,7 @@
 # Recycle Bin Taskbar
+<p align="center">
+<img width="440" height="267" alt="Capture d&#39;écran 2026-07-10 234528" src="https://github.com/user-attachments/assets/0f84faac-10a2-4dcf-ba2b-6c05c6ca2e8b" />
+</p>
 
 Pin the Recycle Bin to your Windows taskbar with a right-click jump list for
 **Empty Recycle Bin** and **Open Recycle Bin** — with the jump list text
