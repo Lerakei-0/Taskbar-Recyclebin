@@ -1,6 +1,6 @@
 # Recycle Bin Taskbar
 <p align="center">
-<img width="440" height="267" alt="Capture d&#39;écran 2026-07-10 234528" src="https://github.com/user-attachments/assets/0f84faac-10a2-4dcf-ba2b-6c05c6ca2e8b" />
+<img alt="Screenshot of the program" src=RecycleBin_Screenshot.png />
 </p>
 
 Pin the Recycle Bin to your Windows taskbar with a right-click jump list for
