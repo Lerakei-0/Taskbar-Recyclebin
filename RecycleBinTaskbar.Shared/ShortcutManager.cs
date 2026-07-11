@@ -25,6 +25,10 @@ namespace RecycleBinTaskbar.Shared
             Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
             "Recycle Bin.lnk");
 
+        private static string GetStartMenuShortcutPath() => Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.Programs),
+            "Recycle Bin.lnk");
+
         /// <summary>
         /// (Re)creates the desktop shortcut and Jump List for the given exe,
         /// using the given language code.
@@ -32,9 +36,14 @@ namespace RecycleBinTaskbar.Shared
         public static void Apply(string exePath, string languageCode)
         {
             var strings = Localization.Get(languageCode);
-            string shortcutPath = GetShortcutPath();
 
-            CreateShortcutWithAppId(shortcutPath, exePath, AppId, IconPath, IconIndex, strings.ShortcutDescription);
+            // A Desktop shortcut is what gets pinned to the taskbar. A Start Menu
+            // shortcut with the same AppUserModelID is also created because
+            // Windows generally requires one to reliably deliver toast
+            // notifications for unpackaged (non-MSIX) apps like this one.
+            CreateShortcutWithAppId(GetShortcutPath(), exePath, AppId, IconPath, IconIndex, strings.ShortcutDescription);
+            CreateShortcutWithAppId(GetStartMenuShortcutPath(), exePath, AppId, IconPath, IconIndex, strings.ShortcutDescription);
+
             RegisterJumpList(exePath, strings);
         }
 
@@ -154,6 +163,8 @@ namespace RecycleBinTaskbar.Shared
                 ShowFrequentCategory = false
             };
 
+            string categoryHeader = BuildCategoryHeader(strings);
+
             jumpList.JumpItems.Add(new JumpTask
             {
                 Title = strings.EmptyTitle,
@@ -162,7 +173,7 @@ namespace RecycleBinTaskbar.Shared
                 Arguments = "/empty",
                 IconResourcePath = IconPath,
                 IconResourceIndex = IconIndex,
-                CustomCategory = "Actions"
+                CustomCategory = categoryHeader
             });
 
             jumpList.JumpItems.Add(new JumpTask
@@ -173,7 +184,7 @@ namespace RecycleBinTaskbar.Shared
                 Arguments = "/open",
                 IconResourcePath = IconPath,
                 IconResourceIndex = IconIndex,
-                CustomCategory = "Actions"
+                CustomCategory = categoryHeader
             });
 
             JumpList.SetJumpList(app, jumpList);
@@ -185,6 +196,19 @@ namespace RecycleBinTaskbar.Shared
                 Thread.Sleep(300);
                 app.Shutdown();
             }
+        }
+
+        private static string BuildCategoryHeader(LanguageStrings strings)
+        {
+            var status = RecycleBinInfo.TryGetStatus();
+            if (status == null)
+                return strings.ShortcutDescription;
+
+            if (status.Value.ItemCount <= 0)
+                return strings.EmptyLabel;
+
+            string size = RecycleBinInfo.FormatSize(status.Value.TotalBytes);
+            return $"{status.Value.ItemCount} {strings.ItemsWord}, {size}";
         }
     }
 }
