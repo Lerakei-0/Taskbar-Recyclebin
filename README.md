@@ -4,9 +4,9 @@
 </p>
 
 Pin the Recycle Bin to your Windows taskbar with a right-click jump list for
-**Empty Recycle Bin** and **Open Recycle Bin** — complete with a live item
+**Empty Recycle Bin** and **Open Recycle Bin** complete with a live item
 count/size header, optional confirmation and sound, toast notifications, and
-a Fluent-styled settings app for choosing the jump list's language.
+a Fluent-styled settings app for choosing the jump list's language. **(program coded with Claude AI)**
 
 ## Features
 
