@@ -8,11 +8,6 @@ Pin the Recycle Bin to your Windows taskbar with a right-click jump list for
 count/size header, optional confirmation and sound, toast notifications, and
 a Fluent-styled settings app for choosing the jump list's language.
 
-<p align="center">
-  <img src="assets/jumplist.png" width="320" alt="Taskbar jump list showing item count header">
-  <img src="assets/settings.png" width="320" alt="Settings window">
-</p>
-
 ## Features
 
 - Pin the Recycle Bin to your taskbar with a proper jump list — no more
