@@ -39,8 +39,30 @@ namespace RecycleBinTaskbar
 
             if (args.Length > 0 && args[0].Equals("/empty", StringComparison.OrdinalIgnoreCase))
             {
-                SHEmptyRecycleBin(IntPtr.Zero, null,
-                    SHERB_NOCONFIRMATION | SHERB_NOPROGRESSUI | SHERB_NOSOUND);
+                var emptySettings = AppSettings.Load();
+
+                uint flags = SHERB_NOPROGRESSUI;
+                if (!emptySettings.ConfirmBeforeEmptying) flags |= SHERB_NOCONFIRMATION;
+                if (!emptySettings.PlaySoundWhenEmptying) flags |= SHERB_NOSOUND;
+
+                int result = SHEmptyRecycleBin(IntPtr.Zero, null, flags);
+
+                // result is S_OK (0) on success. If the user cancelled the
+                // confirmation dialog, this will be non-zero.
+                if (result == 0)
+                {
+                    // Refresh the jump list so the item count/size header is
+                    // up to date immediately, without needing to relaunch the app.
+                    string currentExePath = Process.GetCurrentProcess().MainModule.FileName;
+                    ShortcutManager.Apply(currentExePath, emptySettings.Language);
+
+                    if (emptySettings.ShowNotificationAfterEmptying)
+                    {
+                        var strings = Localization.Get(emptySettings.Language);
+                        ToastHelper.ShowSimpleToast(ShortcutManager.AppId, strings.ShortcutDescription, strings.EmptiedNotification);
+                    }
+                }
+
                 return;
             }
 
