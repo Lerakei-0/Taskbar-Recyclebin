@@ -56,13 +56,15 @@ into the same folder — `RecycleBinSettings.exe` looks for
 > installed on the machine running it, but produces a much smaller build.
 
 ## Setup
-
-1. Run `EmptyRecycleBin.exe` once. This creates a **Recycle Bin** shortcut
+1. Place the two .exe files in a safe folder for example inside your user directory.
+2. Run `EmptyRecycleBin.exe` once. This creates a **Recycle Bin** shortcut
    on your Desktop (and one in your Start Menu, used for notification
    delivery).
-2. Drag the Desktop shortcut onto your taskbar to pin it (or right-click it
-   in the Start menu → *Pin to taskbar*).
-3. Right-click the pinned icon to see the live item count header along with
+3. Drag the Desktop shortcut onto your taskbar to pin it (or right-click it
+   in the Start menu → *Pin to taskbar*). Or alternatively, you can move it in
+   another directory or even change it's icon since this is a shortcut, and only
+   then pin it to your taskbar!
+4. Right-click the pinned icon to see the live item count header along with
    **Empty Recycle Bin** and **Open Recycle Bin**.
 
 ## Changing settings
