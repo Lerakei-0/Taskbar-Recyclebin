@@ -7,10 +7,15 @@
     <Nullable>disable</Nullable>
     <AssemblyName>RecycleBinSettings</AssemblyName>
     <RootNamespace>RecycleBinTaskbar.Settings</RootNamespace>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\RecycleBinTaskbar.Shared\*.cs" LinkBase="Shared" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="3.0.5" />
   </ItemGroup>
 
 </Project>
